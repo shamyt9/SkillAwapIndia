@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Register - Skill Swap India</title>
+
+        <link rel="stylesheet" href="../css/userRegistration.css" />
+    </head>
+    <body>
+        <header>
+            <div class="container">
+                <div class="header-content">
+                    <div class="logo">
+                        <div class="logo-icon">
+                            <svg
+                                width="20"
+                                height="20"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M12 2L3 7L12 12L21 7L12 2Z"
+                                    stroke="white"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
+                                <path
+                                    d="M3 17L12 22L21 17"
+                                    stroke="white"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
+                                <path
+                                    d="M3 12L12 17L21 12"
+                                    stroke="white"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
+                            </svg>
+                        </div>
+                        <div class="logo-text">
+                            Skill <span>Swap</span> India
+                        </div>
+                    </div>
+                    <nav>
+                        <ul>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">Explore Skills</a></li>
+                            <li><a href="#">How It Works</a></li>
+                            <li><a href="#">Login</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div class="container">
+                <div class="page-header">
+                    <h1 class="page-title">Join Skill Swap India</h1>
+                    <p class="page-subtitle">
+                        Create your account and start swapping skills with
+                        others
+                    </p>
+                </div>
+
+                <form class="registration-form" id="registrationForm">
+                    <!-- Personal Information Section -->
+                    <div class="form-section">
+                        <h2 class="section-title">Personal Information</h2>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label
+                                    for="firstName"
+                                    class="form-label required"
+                                    >First Name</label
+                                >
+                                <input
+                                    type="text"
+                                    id="firstName"
+                                    class="form-input"
+                                    required
+                                />
+                            </div>
+                            <div class="form-group">
+                                <label
+                                    for="lastName"
+                                    class="form-label required"
+                                    >Last Name</label
+                                >
+                                <input
+                                    type="text"
+                                    id="lastName"
+                                    class="form-input"
+                                    required
+                                />
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email" class="form-label required"
+                                    >Email Address</label
+                                >
+                                <input
+                                    type="email"
+                                    id="email"
+                                    class="form-input"
+                                    required
+                                />
+                            </div>
+                            <div class="form-group">
+                                <label for="phone" class="form-label required"
+                                    >Phone Number</label
+                                >
+                                <input
+                                    type="tel"
+                                    id="phone"
+                                    class="form-input"
+                                    required
+                                />
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label
+                                    for="password"
+                                    class="form-label required"
+                                    >Password</label
+                                >
+                                <input
+                                    type="password"
+                                    id="password"
+                                    class="form-input"
+                                    required
+                                />
+                            </div>
+                            <div class="form-group">
+                                <label
+                                    for="confirmPassword"
+                                    class="form-label required"
+                                    >Confirm Password</label
+                                >
+                                <input
+                                    type="password"
+                                    id="confirmPassword"
+                                    class="form-input"
+                                    required
+                                />
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label
+                                    for="dateOfBirth"
+                                    class="form-label required"
+                                    >Date of Birth</label
+                                >
+                                <input
+                                    type="date"
+                                    id="dateOfBirth"
+                                    class="form-input"
+                                    required
+                                />
+                            </div>
+                            <div class="form-group">
+                                <label for="gender" class="form-label required"
+                                    >Gender</label
+                                >
+                                <select
+                                    id="gender"
+                                    class="form-select"
+                                    required
+                                >
+                                    <option value="">Select Gender</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                    <option value="other">Other</option>
+                                    <option value="prefer-not-to-say">
+                                        Prefer not to say
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Location Information Section -->
+                    <div class="form-section">
+                        <h2 class="section-title">Location Information</h2>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="address" class="form-label required"
+                                    >Address</label
+                                >
+                                <textarea
+                                    id="address"
+                                    class="form-textarea"
+                                    required
+                                ></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="city" class="form-label required"
+                                    >City</label
+                                >
+                                <input
+                                    type="text"
+                                    id="city"
+                                    class="form-input"
+                                    required
+                                />
+                            </div>
+                            <div class="form-group">
+                                <label for="state" class="form-label required"
+                                    >State</label
+                                >
+                                <select id="state" class="form-select" required>
+                                    <option value="">Select State</option>
+                                    <option value="delhi">Delhi</option>
+                                    <option value="maharashtra">
+                                        Maharashtra
+                                    </option>
+                                    <option value="karnataka">Karnataka</option>
+                                    <option value="tamil-nadu">
+                                        Tamil Nadu
+                                    </option>
+                                    <option value="west-bengal">
+                                        West Bengal
+                                    </option>
+                                    <option value="uttar-pradesh">
+                                        Uttar Pradesh
+                                    </option>
+                                    <option value="gujarat">Gujarat</option>
+                                    <option value="rajasthan">Rajasthan</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="pincode" class="form-label required"
+                                    >PIN Code</label
+                                >
+                                <input
+                                    type="text"
+                                    id="pincode"
+                                    class="form-input"
+                                    required
+                                />
+                            </div>
+                            <div class="form-group">
+                                <label for="country" class="form-label required"
+                                    >Country</label
+                                >
+                                <input
+                                    type="text"
+                                    id="country"
+                                    class="form-input"
+                                    value="India"
+                                    readonly
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Skills Section -->
+                    <div class="form-section">
+                        <h2 class="section-title">Skills Information</h2>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label required"
+                                    >Skills You Have (Select up to 5)</label
+                                >
+                                <div class="skills-container">
+                                    <label class="skill-checkbox">
+                                        <input
+                                            type="checkbox"
+                                            name="skills"
+                                            value="web-development"
+                                        />
+                                        <span></span>
+                                        Web Development
+                                    </label>
+                                    <label class="skill-checkbox">
+                                        <input
+                                            type="checkbox"
+                                            name="skills"
+                                            value="graphic-design"
+                                        />
+                                        <span></span>
+                                        Graphic Design
+                                    </label>
+                                    <label class="skill-checkbox">
+                                        <input
+                                            type="checkbox"
+                                            name="skills"
+                                            value="content-writing"
+                                        />
+                                        <span></span>
+                                        Content Writing
+                                    </label>
+                                    <label class="skill-checkbox">
+                                        <input
+                                            type="checkbox"
+                                            name="skills"
+                                            value="digital-marketing"
+                                        />
+                                        <span></span>
+                                        Digital Marketing
+                                    </label>
+                                    <label class="skill-checkbox">
+                                        <input
+                                            type="checkbox"
+                                            name="skills"
+                                            value="photography"
+                                        />
+                                        <span></span>
+                                        Photography
+                                    </label>
+                                    <label class="skill-checkbox">
+                                        <input
+                                            type="checkbox"
+                                            name="skills"
+                                            value="video-editing"
+                                        />
+                                        <span></span>
+                                        Video Editing
+                                    </label>
+                                    <label class="skill-checkbox">
+                                        <input
+                                            type="checkbox"
+                                            name="skills"
+                                            value="cooking"
+                                        />
+                                        <span></span>
+                                        Cooking
+                                    </label>
+                                    <label class="skill-checkbox">
+                                        <input
+                                            type="checkbox"
+                                            name="skills"
+                                            value="music"
+                                        />
+                                        <span></span>
+                                        Music
+                                    </label>
+                                    <label class="skill-checkbox">
+                                        <input
+                                            type="checkbox"
+                                            name="skills"
+                                            value="language-teaching"
+                                        />
+                                        <span></span>
+                                        Language Teaching
+                                    </label>
+                                    <label class="skill-checkbox">
+                                        <input
+                                            type="checkbox"
+                                            name="skills"
+                                            value="yoga"
+                                        />
+                                        <span></span>
+                                        Yoga
+                                    </label>
+                                    <label class="skill-checkbox">
+                                        <input
+                                            type="checkbox"
+                                            name="skills"
+                                            value="fitness-training"
+                                        />
+                                        <span></span>
+                                        Fitness Training
+                                    </label>
+                                    <label class="skill-checkbox">
+                                        <input
+                                            type="checkbox"
+                                            name="skills"
+                                            value="accounting"
+                                        />
+                                        <span></span>
+                                        Accounting
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label
+                                    for="skillDescription"
+                                    class="form-label required"
+                                    >Describe Your Skills & Experience</label
+                                >
+                                <textarea
+                                    id="skillDescription"
+                                    class="form-textarea"
+                                    placeholder="Briefly describe your skills, experience level, and what you can offer in a skill swap..."
+                                    required
+                                ></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label
+                                    for="skillsToLearn"
+                                    class="form-label required"
+                                    >Skills You Want to Learn</label
+                                >
+                                <textarea
+                                    id="skillsToLearn"
+                                    class="form-textarea"
+                                    placeholder="What skills are you interested in learning from others?"
+                                    required
+                                ></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Aadhaar Verification Section -->
+                    <div class="form-section">
+                        <h2 class="section-title">Aadhaar Verification</h2>
+                        <p
+                            style="
+                                color: var(--color-text-secondary);
+                                margin-bottom: 1.5rem;
+                            "
+                        >
+                            For security and verification purposes, please
+                            upload clear images of your Aadhaar card. We use
+                            this information solely for identity verification
+                            and do not store sensitive data.
+                        </p>
+
+                        <div class="upload-section">
+                            <div class="upload-area" id="frontUpload">
+                                <div class="upload-icon">📄</div>
+                                <div class="upload-text">
+                                    Aadhaar Front Side
+                                </div>
+                                <div class="upload-hint">
+                                    Click to upload or drag & drop
+                                </div>
+                                <input
+                                    type="file"
+                                    id="aadhaarFront"
+                                    accept="image/*"
+                                    style="display: none"
+                                />
+                            </div>
+
+                            <div class="upload-area" id="backUpload">
+                                <div class="upload-icon">📄</div>
+                                <div class="upload-text">Aadhaar Back Side</div>
+                                <div class="upload-hint">
+                                    Click to upload or drag & drop
+                                </div>
+                                <input
+                                    type="file"
+                                    id="aadhaarBack"
+                                    accept="image/*"
+                                    style="display: none"
+                                />
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label
+                                    for="aadhaarNumber"
+                                    class="form-label required"
+                                    >Aadhaar Number</label
+                                >
+                                <input
+                                    type="text"
+                                    id="aadhaarNumber"
+                                    class="form-input"
+                                    placeholder="Enter 12-digit Aadhaar number"
+                                    required
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Form Actions -->
+                    <div class="form-actions">
+                        <div class="terms-agreement">
+                            <input type="checkbox" id="agreeTerms" required />
+                            <label for="agreeTerms"
+                                >I agree to the
+                                <a href="#">Terms of Service</a> and
+                                <a href="#">Privacy Policy</a></label
+                            >
+                        </div>
+
+                        <div>
+                            <button type="button" class="btn btn-secondary">
+                                Cancel
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                                Create Account
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </main>
+
+        <footer>
+            <div class="container">
+                <div class="footer-content">
+                    <div class="copyright">
+                        © 2025 Skill Swap India. All rights reserved.
+                    </div>
+                    <div class="footer-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                // Skill selection limit
+                const skillCheckboxes = document.querySelectorAll(
+                    'input[name="skills"]'
+                );
+                const maxSkills = 5;
+
+                skillCheckboxes.forEach((checkbox) => {
+                    checkbox.addEventListener('change', function () {
+                        const checkedSkills = document.querySelectorAll(
+                            'input[name="skills"]:checked'
+                        );
+                        if (checkedSkills.length > maxSkills) {
+                            this.checked = false;
+                            alert(
+                                `You can select up to ${maxSkills} skills only.`
+                            );
+                        }
+                    });
+                });
+
+                // File upload functionality
+                const frontUpload = document.getElementById('frontUpload');
+                const backUpload = document.getElementById('backUpload');
+                const aadhaarFront = document.getElementById('aadhaarFront');
+                const aadhaarBack = document.getElementById('aadhaarBack');
+
+                frontUpload.addEventListener('click', function () {
+                    aadhaarFront.click();
+                });
+
+                backUpload.addEventListener('click', function () {
+                    aadhaarBack.click();
+                });
+
+                aadhaarFront.addEventListener('change', function () {
+                    if (this.files.length > 0) {
+                        frontUpload.classList.add('active');
+                        frontUpload.querySelector('.upload-text').textContent =
+                            this.files[0].name;
+                    }
+                });
+
+                aadhaarBack.addEventListener('change', function () {
+                    if (this.files.length > 0) {
+                        backUpload.classList.add('active');
+                        backUpload.querySelector('.upload-text').textContent =
+                            this.files[0].name;
+                    }
+                });
+
+                // Drag and drop functionality
+                [frontUpload, backUpload].forEach((uploadArea) => {
+                    uploadArea.addEventListener('dragover', function (e) {
+                        e.preventDefault();
+                        this.classList.add('active');
+                    });
+
+                    uploadArea.addEventListener('dragleave', function () {
+                        this.classList.remove('active');
+                    });
+
+                    uploadArea.addEventListener('drop', function (e) {
+                        e.preventDefault();
+                        this.classList.remove('active');
+
+                        const files = e.dataTransfer.files;
+                        if (files.length > 0) {
+                            const fileInput =
+                                this.querySelector('input[type="file"]');
+                            fileInput.files = files;
+                            this.querySelector('.upload-text').textContent =
+                                files[0].name;
+                        }
+                    });
+                });
+
+                // Form submission
+                const registrationForm =
+                    document.getElementById('registrationForm');
+                registrationForm.addEventListener('submit', function (e) {
+                    e.preventDefault();
+
+                    // Basic validation
+                    const checkedSkills = document.querySelectorAll(
+                        'input[name="skills"]:checked'
+                    );
+                    if (checkedSkills.length === 0) {
+                        alert('Please select at least one skill.');
+                        return;
+                    }
+
+                    if (checkedSkills.length > maxSkills) {
+                        alert(
+                            `Please select no more than ${maxSkills} skills.`
+                        );
+                        return;
+                    }
+
+                    // Aadhaar validation
+                    const aadhaarNumber =
+                        document.getElementById('aadhaarNumber').value;
+                    if (!/^\d{12}$/.test(aadhaarNumber)) {
+                        alert('Please enter a valid 12-digit Aadhaar number.');
+                        return;
+                    }
+
+                    // If all validations pass
+                    alert(
+                        'Registration submitted successfully! Your account will be activated after verification.'
+                    );
+                    // In a real application, you would submit the form data to a server here
+                });
+            });
+        </script>
+    </body>
+</html>
