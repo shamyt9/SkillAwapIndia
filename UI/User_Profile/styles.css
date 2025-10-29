@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+:root {
+  --color-primary: #7e57c2;
+  --color-primary-light: #9575cd;
+  --color-bg-primary: #121212;
+  --color-surface: #1e1e1e;
+  --color-text-primary: #e0e0e0;
+  --color-text-secondary: #a0a0a0;
+  --border-radius: 10px;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.container, .profile-container {
+  background: var(--color-surface);
+  padding: 30px;
+  border-radius: var(--border-radius);
+  box-shadow: 0 0 15px rgba(126, 87, 194, 0.3);
+  width: 100%;
+  max-width: 500px;
+}
+
+h1, h2, h3 {
+  text-align: center;
+  color: var(--color-primary-light);
+}
+
+.input-group {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 5px;
+  color: var(--color-text-secondary);
+}
+
+input, select, button {
+  padding: 10px;
+  border: none;
+  border-radius: var(--border-radius);
+  outline: none;
+}
+
+input, select {
+  background: #2d2d2d;
+  color: var(--color-text-primary);
+}
+
+button {
+  background: var(--color-primary);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background: var(--color-primary-light);
+}
+
+.hidden {
+  display: none;
+}
+
+/* Profile Section */
+.profile-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-header {
+  text-align: center;
+}
+
+.profile-header img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--color-primary);
+}
+
+.profile-body {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.profile-body p {
+  margin: 5px 0;
+}
+
+.aadhaar-section {
+  margin-top: 20px;
+}
+
+.aadhaar-images {
+  display: flex;
+  justify-content: space-around;
+  gap: 10px;
+}
+
+.aadhaar-images img {
+  width: 100px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 2px solid var(--color-primary);
+}
+@media (max-width: 600px) {
+  .aadhaar-images {
+    flex-direction: column;
+    align-items: center;
+  }
+}
