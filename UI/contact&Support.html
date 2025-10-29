@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Contact & Support - Skill Swap</title>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+        <style>
+            :root {
+                --primary: #6366f1;
+                --primary-light: #e0e7ff;
+                --accent: #10b981;
+                --accent-light: #d1fae5;
+                --highlight: #fbbf24;
+                --background: #f8fafc;
+                --card: #ffffff;
+                --text-primary: #1e293b;
+                --text-secondary: #64748b;
+                --error: #ef4444;
+                --success: #22c55e;
+            }
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: 'Inter', sans-serif;
+            }
+
+            body {
+                background-color: var(--background);
+                color: var(--text-primary);
+                line-height: 1.6;
+            }
+
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 20px;
+            }
+
+            /* Header */
+            .header {
+                background: linear-gradient(
+                    135deg,
+                    var(--primary) 0%,
+                    var(--accent) 100%
+                );
+                color: white;
+                padding: 60px 0;
+                text-align: center;
+            }
+
+            .logo {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 15px;
+                margin-bottom: 20px;
+            }
+
+            .logo-icon {
+                width: 50px;
+                height: 50px;
+                border-radius: 12px;
+                background: rgba(255, 255, 255, 0.2);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.5rem;
+                backdrop-filter: blur(10px);
+            }
+
+            .logo-text {
+                font-size: 2rem;
+                font-weight: 700;
+            }
+
+            .tagline {
+                font-size: 1.2rem;
+                opacity: 0.9;
+                max-width: 600px;
+                margin: 0 auto;
+            }
+
+            /* Navigation */
+            .nav {
+                background-color: var(--card);
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+                position: sticky;
+                top: 0;
+                z-index: 100;
+            }
+
+            .nav-container {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 15px 0;
+            }
+
+            .nav-links {
+                display: flex;
+                gap: 30px;
+            }
+
+            .nav-links a {
+                text-decoration: none;
+                color: var(--text-secondary);
+                font-weight: 500;
+                transition: color 0.3s ease;
+            }
+
+            .nav-links a:hover,
+            .nav-links a.active {
+                color: var(--primary);
+            }
+
+            .cta-button {
+                background: linear-gradient(
+                    135deg,
+                    var(--primary) 0%,
+                    var(--accent) 100%
+                );
+                color: white;
+                border: none;
+                border-radius: 8px;
+                padding: 10px 20px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                text-decoration: none;
+                display: inline-block;
+            }
+
+            .cta-button:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 18px rgba(99, 102, 241, 0.4);
+            }
+
+            /* Sections */
+            .section {
+                padding: 80px 0;
+            }
+
+            .section-light {
+                background-color: var(--card);
+            }
+
+            .section-title {
+                text-align: center;
+                font-size: 2.2rem;
+                font-weight: 700;
+                margin-bottom: 15px;
+            }
+
+            .section-subtitle {
+                text-align: center;
+                color: var(--text-secondary);
+                font-size: 1.1rem;
+                max-width: 700px;
+                margin: 0 auto 50px;
+            }
+
+            /* Support Options */
+            .support-options {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 30px;
+                margin-bottom: 60px;
+            }
+
+            .support-card {
+                background-color: var(--card);
+                border-radius: 16px;
+                padding: 30px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+                text-align: center;
+                transition: transform 0.3s ease;
+            }
+
+            .support-card:hover {
+                transform: translateY(-5px);
+            }
+
+            .support-icon {
+                width: 70px;
+                height: 70px;
+                border-radius: 50%;
+                background: linear-gradient(
+                    135deg,
+                    var(--primary) 0%,
+                    var(--accent) 100%
+                );
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-size: 1.8rem;
+                margin: 0 auto 20px;
+            }
+
+            .support-card h3 {
+                font-size: 1.3rem;
+                margin-bottom: 15px;
+                color: var(--text-primary);
+            }
+
+            .support-card p {
+                color: var(--text-secondary);
+                margin-bottom: 20px;
+            }
+
+            .support-link {
+                color: var(--primary);
+                font-weight: 600;
+                text-decoration: none;
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                transition: gap 0.3s ease;
+            }
+
+            .support-link:hover {
+                gap: 12px;
+            }
+
+            /* FAQ Section */
+            .faq-container {
+                max-width: 800px;
+                margin: 0 auto;
+            }
+
+            .faq-item {
+                background-color: var(--card);
+                border-radius: 12px;
+                margin-bottom: 15px;
+                overflow: hidden;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            }
+
+            .faq-question {
+                padding: 20px;
+                font-weight: 600;
+                cursor: pointer;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                transition: background-color 0.3s ease;
+            }
+
+            .faq-question:hover {
+                background-color: var(--primary-light);
+            }
+
+            .faq-answer {
+                padding: 0 20px;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease, padding 0.3s ease;
+                color: var(--text-secondary);
+            }
+
+            .faq-item.active .faq-answer {
+                padding: 0 20px 20px;
+                max-height: 500px;
+            }
+
+            .faq-toggle {
+                color: var(--primary);
+                transition: transform 0.3s ease;
+            }
+
+            .faq-item.active .faq-toggle {
+                transform: rotate(180deg);
+            }
+
+            /* Contact Form */
+            .contact-container {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 50px;
+                align-items: start;
+            }
+
+            .contact-info h3 {
+                font-size: 1.5rem;
+                margin-bottom: 20px;
+                color: var(--text-primary);
+            }
+
+            .contact-details {
+                margin-bottom: 30px;
+            }
+
+            .contact-item {
+                display: flex;
+                align-items: flex-start;
+                gap: 15px;
+                margin-bottom: 20px;
+            }
+
+            .contact-icon {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background-color: var(--primary-light);
+                color: var(--primary);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 0;
+            }
+
+            .contact-text h4 {
+                font-size: 1rem;
+                margin-bottom: 5px;
+                color: var(--text-primary);
+            }
+
+            .contact-text p {
+                color: var(--text-secondary);
+            }
+
+            .business-hours {
+                background-color: var(--primary-light);
+                border-radius: 12px;
+                padding: 20px;
+            }
+
+            .business-hours h4 {
+                color: var(--primary);
+                margin-bottom: 15px;
+            }
+
+            .hours-list {
+                list-style: none;
+            }
+
+            .hours-list li {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 8px;
+                color: var(--text-secondary);
+            }
+
+            .hours-list li:last-child {
+                margin-bottom: 0;
+            }
+
+            .form-container {
+                background-color: var(--card);
+                border-radius: 16px;
+                padding: 30px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            }
+
+            .form-group {
+                margin-bottom: 20px;
+            }
+
+            .form-label {
+                display: block;
+                margin-bottom: 8px;
+                font-weight: 500;
+                color: var(--text-primary);
+            }
+
+            .form-input,
+            .form-select,
+            .form-textarea {
+                width: 100%;
+                padding: 12px 16px;
+                border: 1.5px solid #e2e8f0;
+                border-radius: 10px;
+                font-size: 1rem;
+                transition: all 0.3s ease;
+                background-color: var(--card);
+                color: var(--text-primary);
+            }
+
+            .form-input:focus,
+            .form-select:focus,
+            .form-textarea:focus {
+                outline: none;
+                border-color: var(--primary);
+                box-shadow: 0 0 0 3px var(--primary-light);
+            }
+
+            .form-textarea {
+                resize: vertical;
+                min-height: 120px;
+                font-family: 'Inter', sans-serif;
+            }
+
+            .form-row {
+                display: flex;
+                gap: 15px;
+            }
+
+            .form-row .form-group {
+                flex: 1;
+            }
+
+            .submit-btn {
+                width: 100%;
+                padding: 14px;
+                background: linear-gradient(
+                    135deg,
+                    var(--primary) 0%,
+                    var(--accent) 100%
+                );
+                color: white;
+                border: none;
+                border-radius: 10px;
+                font-size: 1rem;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                margin-top: 10px;
+            }
+
+            .submit-btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 18px rgba(99, 102, 241, 0.4);
+            }
+
+            /* Footer */
+            .footer {
+                background-color: var(--text-primary);
+                color: white;
+                padding: 60px 0 30px;
+            }
+
+            .footer-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 40px;
+                margin-bottom: 40px;
+            }
+
+            .footer-column h3 {
+                font-size: 1.2rem;
+                margin-bottom: 20px;
+                color: white;
+            }
+
+            .footer-links {
+                list-style: none;
+            }
+
+            .footer-links li {
+                margin-bottom: 10px;
+            }
+
+            .footer-links a {
+                color: #94a3b8;
+                text-decoration: none;
+                transition: color 0.3s ease;
+            }
+
+            .footer-links a:hover {
+                color: white;
+            }
+
+            .copyright {
+                text-align: center;
+                padding-top: 30px;
+                border-top: 1px solid #334155;
+                color: #94a3b8;
+                font-size: 0.9rem;
+            }
+
+            /* Success Message */
+            .success-message {
+                background-color: var(--accent-light);
+                color: var(--success);
+                padding: 15px;
+                border-radius: 10px;
+                text-align: center;
+                margin-top: 20px;
+                display: none;
+                font-weight: 500;
+            }
+
+            /* Responsive */
+            @media (max-width: 768px) {
+                .nav-container {
+                    flex-direction: column;
+                    gap: 15px;
+                }
+
+                .nav-links {
+                    gap: 20px;
+                }
+
+                .contact-container {
+                    grid-template-columns: 1fr;
+                    gap: 30px;
+                }
+
+                .form-row {
+                    flex-direction: column;
+                    gap: 0;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Header -->
+        <header class="header">
+            <div class="container">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <div class="logo-text">Skill Swap</div>
+                </div>
+                <p class="tagline">
+                    We're here to help you with any questions or issues
+                </p>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="nav">
+            <div class="container nav-container">
+                <div class="nav-links">
+                    <a href="#">Home</a>
+                    <a href="#">About</a>
+                    <a href="#">Explore</a>
+                    <a href="#" class="active">Support</a>
+                    <a href="#">Contact</a>
+                </div>
+                <a href="#" class="cta-button">Get Help Now</a>
+            </div>
+        </nav>
+
+        <!-- Support Options -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">How Can We Help You?</h2>
+                <p class="section-subtitle">
+                    Choose the support option that works best for your needs
+                </p>
+
+                <div class="support-options">
+                    <div class="support-card">
+                        <div class="support-icon">
+                            <i class="fas fa-question-circle"></i>
+                        </div>
+                        <h3>Help Center</h3>
+                        <p>
+                            Browse our comprehensive knowledge base with
+                            articles, tutorials, and FAQs.
+                        </p>
+                        <a href="#" class="support-link">
+                            Visit Help Center <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+
+                    <div class="support-card">
+                        <div class="support-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <h3>Live Chat</h3>
+                        <p>
+                            Chat directly with our support team for immediate
+                            assistance with any issues.
+                        </p>
+                        <a href="#" class="support-link">
+                            Start Live Chat <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+
+                    <div class="support-card">
+                        <div class="support-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <h3>Phone Support</h3>
+                        <p>
+                            Speak with our support specialists for personalized
+                            help with your account.
+                        </p>
+                        <a href="#" class="support-link">
+                            Call Now <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="section section-light">
+            <div class="container">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <p class="section-subtitle">
+                    Quick answers to common questions about Skill Swap
+                </p>
+
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            How do I create a skill listing?
+                            <span class="faq-toggle"
+                                ><i class="fas fa-chevron-down"></i
+                            ></span>
+                        </div>
+                        <div class="faq-answer">
+                            To create a skill listing, go to your dashboard and
+                            click "Add New Skill". Fill in the details about
+                            what you can teach, your experience level,
+                            availability, and preferred teaching mode. Once
+                            submitted, your skill will be visible to other
+                            users.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            How does the payment system work?
+                            <span class="faq-toggle"
+                                ><i class="fas fa-chevron-down"></i
+                            ></span>
+                        </div>
+                        <div class="faq-answer">
+                            Skill Swap uses a secure payment system where
+                            learners pay for sessions upfront. Funds are held
+                            securely and released to teachers after completed
+                            sessions. We support major credit cards, PayPal, and
+                            bank transfers.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            What if I need to cancel a session?
+                            <span class="faq-toggle"
+                                ><i class="fas fa-chevron-down"></i
+                            ></span>
+                        </div>
+                        <div class="faq-answer">
+                            You can cancel sessions up to 24 hours in advance
+                            without penalty. For cancellations within 24 hours,
+                            please contact the other user directly to
+                            reschedule. Repeated last-minute cancellations may
+                            affect your account standing.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            How do I verify my teaching credentials?
+                            <span class="faq-toggle"
+                                ><i class="fas fa-chevron-down"></i
+                            ></span>
+                        </div>
+                        <div class="faq-answer">
+                            You can verify your credentials by uploading
+                            certificates, diplomas, or other proof of expertise
+                            in your profile settings. Our team reviews
+                            submissions within 2 business days. Verified
+                            teachers receive a badge on their profile.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            Is my personal information secure?
+                            <span class="faq-toggle"
+                                ><i class="fas fa-chevron-down"></i
+                            ></span>
+                        </div>
+                        <div class="faq-answer">
+                            Yes, we take data security seriously. All personal
+                            information is encrypted and stored securely. We
+                            never share your data with third parties without
+                            your consent. You can read more in our Privacy
+                            Policy.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            What happens if I have a dispute with another user?
+                            <span class="faq-toggle"
+                                ><i class="fas fa-chevron-down"></i
+                            ></span>
+                        </div>
+                        <div class="faq-answer">
+                            If you have a dispute, please contact our support
+                            team immediately. We'll mediate the situation and
+                            work towards a fair resolution. For payment
+                            disputes, we can temporarily hold funds while
+                            investigating the issue.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Form -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Get In Touch</h2>
+                <p class="section-subtitle">
+                    Send us a message and we'll get back to you as soon as
+                    possible
+                </p>
+
+                <div class="contact-container">
+                    <div class="contact-info">
+                        <h3>Contact Information</h3>
+
+                        <div class="contact-details">
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="contact-text">
+                                    <h4>Our Office</h4>
+                                    <p>
+                                        123 Learning Street<br />San Francisco,
+                                        CA 94102
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <div class="contact-text">
+                                    <h4>Phone Number</h4>
+                                    <p>+1 (555) 123-4567</p>
+                                </div>
+                            </div>
+
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div class="contact-text">
+                                    <h4>Email Address</h4>
+                                    <p>support@skillswap.com</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="business-hours">
+                            <h4>Business Hours</h4>
+                            <ul class="hours-list">
+                                <li>
+                                    <span>Monday - Friday</span>
+                                    <span>9:00 AM - 6:00 PM PST</span>
+                                </li>
+                                <li>
+                                    <span>Saturday</span>
+                                    <span>10:00 AM - 4:00 PM PST</span>
+                                </li>
+                                <li><span>Sunday</span> <span>Closed</span></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="form-container">
+                        <form id="contactForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">First Name</label>
+                                    <input
+                                        type="text"
+                                        class="form-input"
+                                        required
+                                    />
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Last Name</label>
+                                    <input
+                                        type="text"
+                                        class="form-input"
+                                        required
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Email Address</label>
+                                <input
+                                    type="email"
+                                    class="form-input"
+                                    required
+                                />
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Subject</label>
+                                <select class="form-select" required>
+                                    <option value="">Select a subject</option>
+                                    <option value="account">
+                                        Account Issues
+                                    </option>
+                                    <option value="payment">
+                                        Payment Problems
+                                    </option>
+                                    <option value="technical">
+                                        Technical Support
+                                    </option>
+                                    <option value="feature">
+                                        Feature Request
+                                    </option>
+                                    <option value="partnership">
+                                        Partnership Inquiry
+                                    </option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Message</label>
+                                <textarea
+                                    class="form-textarea"
+                                    placeholder="Please describe your issue or question in detail..."
+                                    required
+                                ></textarea>
+                            </div>
+
+                            <button type="submit" class="submit-btn">
+                                Send Message
+                            </button>
+
+                            <div class="success-message" id="successMessage">
+                                <i class="fas fa-check-circle"></i> Thank you!
+                                Your message has been sent successfully.
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-column">
+                        <h3>Skill Swap</h3>
+                        <ul class="footer-links">
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Our Mission</a></li>
+                            <li><a href="#">Careers</a></li>
+                            <li><a href="#">Press</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-column">
+                        <h3>Resources</h3>
+                        <ul class="footer-links">
+                            <li><a href="#">Help Center</a></li>
+                            <li><a href="#">Community Guidelines</a></li>
+                            <li><a href="#">Safety Tips</a></li>
+                            <li><a href="#">Blog</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-column">
+                        <h3>Legal</h3>
+                        <ul class="footer-links">
+                            <li><a href="#">Terms of Service</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Cookie Policy</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-column">
+                        <h3>Connect</h3>
+                        <ul class="footer-links">
+                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="#">Twitter</a></li>
+                            <li><a href="#">Instagram</a></li>
+                            <li><a href="#">Facebook</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="copyright">
+                    &copy; 2023 Skill Swap. All rights reserved.
+                </div>
+            </div>
+        </footer>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                // FAQ Toggle Functionality
+                const faqItems = document.querySelectorAll('.faq-item');
+
+                faqItems.forEach((item) => {
+                    const question = item.querySelector('.faq-question');
+
+                    question.addEventListener('click', () => {
+                        // Close all other FAQ items
+                        faqItems.forEach((otherItem) => {
+                            if (otherItem !== item) {
+                                otherItem.classList.remove('active');
+                            }
+                        });
+
+                        // Toggle current item
+                        item.classList.toggle('active');
+                    });
+                });
+
+                // Contact Form Submission
+                const contactForm = document.getElementById('contactForm');
+                const successMessage =
+                    document.getElementById('successMessage');
+
+                contactForm.addEventListener('submit', function (e) {
+                    e.preventDefault();
+
+                    // In a real application, you would send the form data to a server here
+                    // For demo purposes, we'll just show a success message
+
+                    // Show success message
+                    successMessage.style.display = 'block';
+
+                    // Reset form
+                    contactForm.reset();
+
+                    // Hide success message after 5 seconds
+                    setTimeout(() => {
+                        successMessage.style.display = 'none';
+                    }, 5000);
+                });
+            });
+        </script>
+    </body>
+</html>

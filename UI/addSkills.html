@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Add Your Skills - Skill Swap</title>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+        <style>
+            :root {
+                --primary: #6366f1;
+                --primary-light: #e0e7ff;
+                --accent: #10b981;
+                --accent-light: #d1fae5;
+                --highlight: #fbbf24;
+                --background: #f8fafc;
+                --card: #ffffff;
+                --text-primary: #1e293b;
+                --text-secondary: #64748b;
+                --error: #ef4444;
+                --success: #22c55e;
+            }
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: 'Inter', sans-serif;
+            }
+
+            body {
+                background-color: var(--background);
+                color: var(--text-primary);
+                min-height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 20px;
+            }
+
+            .container {
+                width: 100%;
+                max-width: 600px;
+            }
+
+            .header {
+                text-align: center;
+                margin-bottom: 30px;
+            }
+
+            .header h1 {
+                font-weight: 700;
+                font-size: 2rem;
+                margin-bottom: 8px;
+                color: var(--text-primary);
+            }
+
+            .header p {
+                color: var(--text-secondary);
+                font-size: 1rem;
+                margin-bottom: 16px;
+            }
+
+            .progress-bar {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+                margin-bottom: 30px;
+            }
+
+            .step {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                color: var(--text-secondary);
+                font-size: 0.9rem;
+            }
+
+            .step.active {
+                color: var(--primary);
+                font-weight: 500;
+            }
+
+            .step-number {
+                width: 24px;
+                height: 24px;
+                border-radius: 50%;
+                background-color: var(--primary-light);
+                color: var(--primary);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 0.8rem;
+                font-weight: 600;
+            }
+
+            .step.active .step-number {
+                background-color: var(--primary);
+                color: white;
+            }
+
+            .form-container {
+                background-color: var(--card);
+                border-radius: 16px;
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+                padding: 30px;
+                margin-bottom: 30px;
+            }
+
+            .skill-form {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .form-group {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            label {
+                font-weight: 500;
+                color: var(--text-primary);
+                font-size: 0.9rem;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+
+            label i {
+                color: var(--primary);
+                width: 16px;
+            }
+
+            input,
+            select,
+            textarea {
+                width: 100%;
+                padding: 14px 16px;
+                border: 1.5px solid #e2e8f0;
+                border-radius: 10px;
+                font-size: 1rem;
+                transition: all 0.3s ease;
+                background-color: var(--card);
+                color: var(--text-primary);
+            }
+
+            input:focus,
+            select:focus,
+            textarea:focus {
+                outline: none;
+                border-color: var(--primary);
+                box-shadow: 0 0 0 3px var(--primary-light);
+            }
+
+            .form-row {
+                display: flex;
+                gap: 16px;
+            }
+
+            .form-row .form-group {
+                flex: 1;
+            }
+
+            .add-skill-btn {
+                background-color: var(--primary-light);
+                color: var(--primary);
+                border: 1.5px dashed var(--primary);
+                border-radius: 10px;
+                padding: 14px;
+                font-size: 1rem;
+                font-weight: 500;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+                margin-top: 10px;
+            }
+
+            .add-skill-btn:hover {
+                background-color: var(--primary);
+                color: white;
+            }
+
+            .save-btn {
+                width: 100%;
+                padding: 16px;
+                background: linear-gradient(
+                    135deg,
+                    var(--primary) 0%,
+                    var(--accent) 100%
+                );
+                color: white;
+                border: none;
+                border-radius: 10px;
+                font-size: 1rem;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+                box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+            }
+
+            .save-btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 18px rgba(99, 102, 241, 0.4);
+            }
+
+            .skills-list {
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .skill-card {
+                background-color: var(--card);
+                border-radius: 12px;
+                padding: 20px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+                border-left: 4px solid var(--primary);
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+            }
+
+            .skill-info h3 {
+                font-size: 1.1rem;
+                margin-bottom: 6px;
+                color: var(--text-primary);
+            }
+
+            .skill-meta {
+                display: flex;
+                gap: 12px;
+                margin-bottom: 8px;
+                flex-wrap: wrap;
+            }
+
+            .skill-tag {
+                background-color: var(--primary-light);
+                color: var(--primary);
+                padding: 4px 10px;
+                border-radius: 20px;
+                font-size: 0.8rem;
+                font-weight: 500;
+            }
+
+            .skill-description {
+                color: var(--text-secondary);
+                font-size: 0.9rem;
+                line-height: 1.4;
+            }
+
+            .skill-actions {
+                display: flex;
+                gap: 8px;
+            }
+
+            .skill-actions button {
+                background: none;
+                border: none;
+                color: var(--text-secondary);
+                cursor: pointer;
+                font-size: 1rem;
+                transition: color 0.2s ease;
+            }
+
+            .skill-actions button:hover {
+                color: var(--primary);
+            }
+
+            .empty-state {
+                text-align: center;
+                padding: 40px 20px;
+                color: var(--text-secondary);
+            }
+
+            .empty-state i {
+                font-size: 3rem;
+                margin-bottom: 16px;
+                color: var(--primary-light);
+            }
+
+            .empty-state p {
+                font-size: 1rem;
+            }
+
+            @media (max-width: 600px) {
+                .form-container {
+                    padding: 20px;
+                }
+
+                .form-row {
+                    flex-direction: column;
+                    gap: 0;
+                }
+
+                .skill-card {
+                    flex-direction: column;
+                    gap: 16px;
+                }
+
+                .skill-actions {
+                    align-self: flex-end;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h1>Add Your Skills</h1>
+                <p>
+                    Tell us what you can teach or want to learn — add multiple
+                    skills to your profile.
+                </p>
+                <div class="progress-bar">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <span>Profile</span>
+                    </div>
+                    <div class="step active">
+                        <div class="step-number">2</div>
+                        <span>Skills</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-container">
+                <form class="skill-form" id="skillForm">
+                    <div class="form-group">
+                        <label for="role"
+                            ><i class="fas fa-user-tag"></i> Role</label
+                        >
+                        <select id="role" name="role" required>
+                            <option value="">Select your role</option>
+                            <option value="teacher">Teacher</option>
+                            <option value="learner">Learner</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="skillName"
+                            ><i class="fas fa-lightbulb"></i> Skill Name</label
+                        >
+                        <input
+                            type="text"
+                            id="skillName"
+                            name="skillName"
+                            placeholder="e.g., Video Editing, Python, Guitar"
+                            required
+                        />
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="skillLevel"
+                                ><i class="fas fa-chart-line"></i> Skill
+                                Level</label
+                            >
+                            <select id="skillLevel" name="skillLevel" required>
+                                <option value="">Select level</option>
+                                <option value="beginner">Beginner</option>
+                                <option value="intermediate">
+                                    Intermediate
+                                </option>
+                                <option value="expert">Expert</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="preferredMode"
+                                ><i class="fas fa-laptop-house"></i> Preferred
+                                Mode</label
+                            >
+                            <select
+                                id="preferredMode"
+                                name="preferredMode"
+                                required
+                            >
+                                <option value="">Select mode</option>
+                                <option value="online">Online</option>
+                                <option value="in-person">In-person</option>
+                                <option value="both">Both</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="availability"
+                            ><i class="fas fa-clock"></i> Availability
+                            Time</label
+                        >
+                        <input
+                            type="text"
+                            id="availability"
+                            name="availability"
+                            placeholder="e.g., Weekends, 6–9 PM"
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description"
+                            ><i class="fas fa-edit"></i> Description /
+                            Note</label
+                        >
+                        <textarea
+                            id="description"
+                            name="description"
+                            rows="3"
+                            placeholder="e.g., I can teach advanced Premiere Pro editing."
+                        ></textarea>
+                    </div>
+
+                    <div
+                        class="form-group"
+                        id="experienceField"
+                        style="display: none"
+                    >
+                        <label for="experience"
+                            ><i class="fas fa-briefcase"></i> Experience
+                            (years)</label
+                        >
+                        <input
+                            type="number"
+                            id="experience"
+                            name="experience"
+                            min="0"
+                            max="50"
+                            placeholder="e.g., 2"
+                        />
+                    </div>
+
+                    <button
+                        type="button"
+                        class="add-skill-btn"
+                        id="addSkillBtn"
+                    >
+                        <i class="fas fa-plus"></i> Add Another Skill
+                    </button>
+
+                    <button type="submit" class="save-btn">
+                        <i class="fas fa-save"></i> Save & Finish
+                    </button>
+                </form>
+            </div>
+
+            <div class="skills-list" id="skillsList">
+                <!-- Skills will be added here dynamically -->
+                <div class="empty-state" id="emptyState">
+                    <i class="fas fa-lightbulb"></i>
+                    <p>
+                        No skills added yet. Start by adding your first skill
+                        above!
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const skillForm = document.getElementById('skillForm');
+                const addSkillBtn = document.getElementById('addSkillBtn');
+                const skillsList = document.getElementById('skillsList');
+                const emptyState = document.getElementById('emptyState');
+                const roleSelect = document.getElementById('role');
+                const experienceField =
+                    document.getElementById('experienceField');
+
+                let skills = [];
+
+                // Show/hide experience field based on role selection
+                roleSelect.addEventListener('change', function () {
+                    if (this.value === 'teacher') {
+                        experienceField.style.display = 'flex';
+                    } else {
+                        experienceField.style.display = 'none';
+                    }
+                });
+
+                // Add skill to the list
+                addSkillBtn.addEventListener('click', function () {
+                    addSkill();
+                });
+
+                // Submit form (save all skills)
+                skillForm.addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    if (skills.length === 0) {
+                        addSkill();
+                    }
+                    saveSkills();
+                });
+
+                function addSkill() {
+                    const role = document.getElementById('role').value;
+                    const skillName =
+                        document.getElementById('skillName').value;
+                    const skillLevel =
+                        document.getElementById('skillLevel').value;
+                    const preferredMode =
+                        document.getElementById('preferredMode').value;
+                    const availability =
+                        document.getElementById('availability').value;
+                    const description =
+                        document.getElementById('description').value;
+                    const experience =
+                        document.getElementById('experience').value;
+
+                    // Validate required fields
+                    if (!role || !skillName || !skillLevel || !preferredMode) {
+                        alert('Please fill in all required fields');
+                        return;
+                    }
+
+                    // Create skill object
+                    const skill = {
+                        id: Date.now(),
+                        role,
+                        skillName,
+                        skillLevel,
+                        preferredMode,
+                        availability,
+                        description,
+                        experience,
+                    };
+
+                    skills.push(skill);
+                    renderSkills();
+                    resetForm();
+
+                    // Hide empty state
+                    emptyState.style.display = 'none';
+                }
+
+                function renderSkills() {
+                    skillsList.innerHTML = '';
+
+                    skills.forEach((skill) => {
+                        const skillCard = document.createElement('div');
+                        skillCard.className = 'skill-card';
+
+                        // Determine role icon and text
+                        const roleIcon =
+                            skill.role === 'teacher'
+                                ? 'fas fa-chalkboard-teacher'
+                                : 'fas fa-user-graduate';
+                        const roleText =
+                            skill.role === 'teacher' ? 'Teacher' : 'Learner';
+
+                        // Determine level color
+                        let levelColor = '';
+                        if (skill.skillLevel === 'beginner')
+                            levelColor = '#10B981';
+                        if (skill.skillLevel === 'intermediate')
+                            levelColor = '#FBBF24';
+                        if (skill.skillLevel === 'expert')
+                            levelColor = '#EF4444';
+
+                        skillCard.innerHTML = `
+                        <div class="skill-info">
+                            <h3>${skill.skillName}</h3>
+                            <div class="skill-meta">
+                                <span class="skill-tag"><i class="${roleIcon}"></i> ${roleText}</span>
+                                <span class="skill-tag" style="background-color: ${levelColor}10; color: ${levelColor};"><i class="fas fa-chart-line"></i> ${
+                            skill.skillLevel.charAt(0).toUpperCase() +
+                            skill.skillLevel.slice(1)
+                        }</span>
+                                <span class="skill-tag"><i class="fas fa-laptop-house"></i> ${
+                                    skill.preferredMode
+                                        .charAt(0)
+                                        .toUpperCase() +
+                                    skill.preferredMode.slice(1)
+                                }</span>
+                                ${
+                                    skill.availability
+                                        ? `<span class="skill-tag"><i class="fas fa-clock"></i> ${skill.availability}</span>`
+                                        : ''
+                                }
+                                ${
+                                    skill.experience
+                                        ? `<span class="skill-tag"><i class="fas fa-briefcase"></i> ${skill.experience} years</span>`
+                                        : ''
+                                }
+                            </div>
+                            ${
+                                skill.description
+                                    ? `<p class="skill-description">${skill.description}</p>`
+                                    : ''
+                            }
+                        </div>
+                        <div class="skill-actions">
+                            <button type="button" onclick="editSkill(${
+                                skill.id
+                            })"><i class="fas fa-edit"></i></button>
+                            <button type="button" onclick="deleteSkill(${
+                                skill.id
+                            })"><i class="fas fa-trash"></i></button>
+                        </div>
+                    `;
+
+                        skillsList.appendChild(skillCard);
+                    });
+                }
+
+                function resetForm() {
+                    document.getElementById('skillName').value = '';
+                    document.getElementById('skillLevel').value = '';
+                    document.getElementById('preferredMode').value = '';
+                    document.getElementById('availability').value = '';
+                    document.getElementById('description').value = '';
+                    document.getElementById('experience').value = '';
+                }
+
+                function saveSkills() {
+                    // In a real application, you would send the skills to a server here
+                    alert(`Successfully saved ${skills.length} skill(s)!`);
+                    console.log('Saved skills:', skills);
+                }
+
+                // Make functions available globally for the buttons
+                window.editSkill = function (id) {
+                    const skill = skills.find((s) => s.id === id);
+                    if (skill) {
+                        document.getElementById('role').value = skill.role;
+                        document.getElementById('skillName').value =
+                            skill.skillName;
+                        document.getElementById('skillLevel').value =
+                            skill.skillLevel;
+                        document.getElementById('preferredMode').value =
+                            skill.preferredMode;
+                        document.getElementById('availability').value =
+                            skill.availability;
+                        document.getElementById('description').value =
+                            skill.description;
+                        document.getElementById('experience').value =
+                            skill.experience;
+
+                        // Show experience field if needed
+                        if (skill.role === 'teacher') {
+                            experienceField.style.display = 'flex';
+                        }
+
+                        // Remove the skill from the list
+                        skills = skills.filter((s) => s.id !== id);
+                        renderSkills();
+
+                        if (skills.length === 0) {
+                            emptyState.style.display = 'block';
+                        }
+                    }
+                };
+
+                window.deleteSkill = function (id) {
+                    skills = skills.filter((s) => s.id !== id);
+                    renderSkills();
+
+                    if (skills.length === 0) {
+                        emptyState.style.display = 'block';
+                    }
+                };
+            });
+        </script>
+    </body>
+</html>

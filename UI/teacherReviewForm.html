@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Review Teacher - Skill Swap</title>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+        <style>
+            :root {
+                --primary: #6366f1;
+                --primary-light: #e0e7ff;
+                --accent: #10b981;
+                --accent-light: #d1fae5;
+                --highlight: #fbbf24;
+                --background: #f8fafc;
+                --card: #ffffff;
+                --text-primary: #1e293b;
+                --text-secondary: #64748b;
+                --error: #ef4444;
+                --success: #22c55e;
+            }
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: 'Inter', sans-serif;
+            }
+
+            body {
+                background-color: var(--background);
+                color: var(--text-primary);
+                min-height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 20px;
+            }
+
+            .container {
+                width: 100%;
+                max-width: 500px;
+            }
+
+            .header {
+                text-align: center;
+                margin-bottom: 30px;
+            }
+
+            .header h1 {
+                font-weight: 600;
+                font-size: 1.8rem;
+                margin-bottom: 8px;
+                color: var(--text-primary);
+            }
+
+            .header p {
+                color: var(--text-secondary);
+                font-size: 1rem;
+            }
+
+            .teacher-card {
+                background-color: var(--card);
+                border-radius: 12px;
+                padding: 20px;
+                margin-bottom: 25px;
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            }
+
+            .teacher-avatar {
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+                background: linear-gradient(
+                    135deg,
+                    var(--primary) 0%,
+                    var(--accent) 100%
+                );
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-size: 1.5rem;
+                font-weight: 600;
+            }
+
+            .teacher-info h3 {
+                font-size: 1.2rem;
+                margin-bottom: 5px;
+            }
+
+            .teacher-info p {
+                color: var(--text-secondary);
+                font-size: 0.9rem;
+            }
+
+            .form-container {
+                background-color: var(--card);
+                border-radius: 16px;
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+                padding: 30px;
+            }
+
+            .review-form {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .form-group {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            label {
+                font-weight: 500;
+                color: var(--text-primary);
+                font-size: 0.9rem;
+            }
+
+            .rating-stars {
+                display: flex;
+                gap: 8px;
+                margin: 5px 0;
+            }
+
+            .star {
+                font-size: 1.8rem;
+                color: #e2e8f0;
+                cursor: pointer;
+                transition: color 0.2s ease;
+            }
+
+            .star:hover {
+                color: var(--highlight);
+            }
+
+            .star.active {
+                color: var(--highlight);
+            }
+
+            textarea {
+                width: 100%;
+                padding: 14px 16px;
+                border: 1.5px solid #e2e8f0;
+                border-radius: 10px;
+                font-size: 1rem;
+                transition: all 0.3s ease;
+                background-color: var(--card);
+                color: var(--text-primary);
+                resize: vertical;
+                min-height: 120px;
+                font-family: 'Inter', sans-serif;
+            }
+
+            textarea:focus {
+                outline: none;
+                border-color: var(--primary);
+                box-shadow: 0 0 0 3px var(--primary-light);
+            }
+
+            .submit-btn {
+                width: 100%;
+                padding: 14px;
+                background: linear-gradient(
+                    135deg,
+                    var(--primary) 0%,
+                    var(--accent) 100%
+                );
+                color: white;
+                border: none;
+                border-radius: 10px;
+                font-size: 1rem;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                margin-top: 10px;
+            }
+
+            .submit-btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 18px rgba(99, 102, 241, 0.4);
+            }
+
+            .success-message {
+                background-color: var(--accent-light);
+                color: var(--success);
+                padding: 15px;
+                border-radius: 10px;
+                text-align: center;
+                margin-top: 20px;
+                display: none;
+                font-weight: 500;
+            }
+
+            @media (max-width: 480px) {
+                .form-container {
+                    padding: 25px 20px;
+                }
+
+                .teacher-card {
+                    flex-direction: column;
+                    text-align: center;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h1>Leave a Review</h1>
+                <p>Share your experience with this teacher</p>
+            </div>
+
+            <div class="teacher-card">
+                <div class="teacher-avatar">JD</div>
+                <div class="teacher-info">
+                    <h3>John Doe</h3>
+                    <p>Python & Web Development</p>
+                </div>
+            </div>
+
+            <div class="form-container">
+                <form class="review-form" id="reviewForm">
+                    <div class="form-group">
+                        <label>Overall Rating</label>
+                        <div class="rating-stars" id="ratingStars">
+                            <span class="star" data-rating="1">★</span>
+                            <span class="star" data-rating="2">★</span>
+                            <span class="star" data-rating="3">★</span>
+                            <span class="star" data-rating="4">★</span>
+                            <span class="star" data-rating="5">★</span>
+                        </div>
+                        <input
+                            type="hidden"
+                            id="rating"
+                            name="rating"
+                            required
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="review">Your Review</label>
+                        <textarea
+                            id="review"
+                            name="review"
+                            placeholder="What did you like about this teacher? How was their teaching style? Would you recommend them to others?"
+                            required
+                        ></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        Submit Review
+                    </button>
+
+                    <div class="success-message" id="successMessage">
+                        <i class="fas fa-check-circle"></i> Thank you! Your
+                        review has been submitted.
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const stars = document.querySelectorAll('.star');
+                const ratingInput = document.getElementById('rating');
+                const reviewForm = document.getElementById('reviewForm');
+                const successMessage =
+                    document.getElementById('successMessage');
+
+                let currentRating = 0;
+
+                // Star rating functionality
+                stars.forEach((star) => {
+                    star.addEventListener('click', function () {
+                        const rating = parseInt(
+                            this.getAttribute('data-rating')
+                        );
+                        currentRating = rating;
+                        ratingInput.value = rating;
+
+                        // Update star appearance
+                        stars.forEach((s) => {
+                            if (
+                                parseInt(s.getAttribute('data-rating')) <=
+                                rating
+                            ) {
+                                s.classList.add('active');
+                            } else {
+                                s.classList.remove('active');
+                            }
+                        });
+                    });
+
+                    // Hover effect
+                    star.addEventListener('mouseover', function () {
+                        const rating = parseInt(
+                            this.getAttribute('data-rating')
+                        );
+
+                        stars.forEach((s) => {
+                            if (
+                                parseInt(s.getAttribute('data-rating')) <=
+                                rating
+                            ) {
+                                s.style.color = 'var(--highlight)';
+                            } else {
+                                s.style.color = '#e2e8f0';
+                            }
+                        });
+                    });
+
+                    star.addEventListener('mouseout', function () {
+                        stars.forEach((s) => {
+                            if (
+                                parseInt(s.getAttribute('data-rating')) <=
+                                currentRating
+                            ) {
+                                s.style.color = 'var(--highlight)';
+                            } else {
+                                s.style.color = '#e2e8f0';
+                            }
+                        });
+                    });
+                });
+
+                // Form submission
+                reviewForm.addEventListener('submit', function (e) {
+                    e.preventDefault();
+
+                    // Validate rating
+                    if (!ratingInput.value) {
+                        alert('Please select a rating');
+                        return;
+                    }
+
+                    // Validate review text
+                    const reviewText = document.getElementById('review').value;
+                    if (!reviewText.trim()) {
+                        alert('Please write a review');
+                        return;
+                    }
+
+                    // In a real application, you would submit the form to a server here
+                    console.log('Review submitted:', {
+                        rating: ratingInput.value,
+                        review: reviewText,
+                    });
+
+                    // Show success message
+                    successMessage.style.display = 'block';
+
+                    // Reset form after 2 seconds
+                    setTimeout(() => {
+                        reviewForm.reset();
+                        stars.forEach((s) => s.classList.remove('active'));
+                        currentRating = 0;
+                        successMessage.style.display = 'none';
+                    }, 3000);
+                });
+            });
+        </script>
+    </body>
+</html>

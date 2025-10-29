@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Bookings - Skill Swap</title>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+        <style>
+            :root {
+                --primary: #6366f1;
+                --primary-light: #e0e7ff;
+                --accent: #10b981;
+                --accent-light: #d1fae5;
+                --highlight: #fbbf24;
+                --background: #f8fafc;
+                --card: #ffffff;
+                --text-primary: #1e293b;
+                --text-secondary: #64748b;
+                --error: #ef4444;
+                --success: #22c55e;
+            }
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: 'Inter', sans-serif;
+            }
+
+            body {
+                background-color: var(--background);
+                color: var(--text-primary);
+                min-height: 100vh;
+            }
+
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+
+            /* Header */
+            .header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 30px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #e2e8f0;
+            }
+
+            .logo {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+            }
+
+            .logo-icon {
+                width: 40px;
+                height: 40px;
+                border-radius: 10px;
+                background: linear-gradient(
+                    135deg,
+                    var(--primary) 0%,
+                    var(--accent) 100%
+                );
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-size: 1.2rem;
+            }
+
+            .logo-text {
+                font-size: 1.5rem;
+                font-weight: 700;
+                color: var(--text-primary);
+            }
+
+            .nav-links {
+                display: flex;
+                gap: 25px;
+            }
+
+            .nav-links a {
+                text-decoration: none;
+                color: var(--text-secondary);
+                font-weight: 500;
+                transition: color 0.3s ease;
+            }
+
+            .nav-links a:hover,
+            .nav-links a.active {
+                color: var(--primary);
+            }
+
+            .user-menu {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+            }
+
+            .notification-icon {
+                position: relative;
+                color: var(--text-secondary);
+                font-size: 1.2rem;
+                cursor: pointer;
+            }
+
+            .notification-badge {
+                position: absolute;
+                top: -5px;
+                right: -5px;
+                background-color: var(--error);
+                color: white;
+                border-radius: 50%;
+                width: 18px;
+                height: 18px;
+                font-size: 0.7rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .user-avatar {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background: linear-gradient(
+                    135deg,
+                    var(--primary) 0%,
+                    var(--accent) 100%
+                );
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-weight: 600;
+                cursor: pointer;
+            }
+
+            /* Dashboard Layout */
+            .dashboard {
+                display: grid;
+                grid-template-columns: 250px 1fr;
+                gap: 30px;
+            }
+
+            /* Sidebar */
+            .sidebar {
+                background-color: var(--card);
+                border-radius: 16px;
+                padding: 25px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+                height: fit-content;
+            }
+
+            .sidebar-menu {
+                list-style: none;
+            }
+
+            .sidebar-menu li {
+                margin-bottom: 10px;
+            }
+
+            .sidebar-menu a {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                padding: 12px 15px;
+                border-radius: 10px;
+                text-decoration: none;
+                color: var(--text-secondary);
+                transition: all 0.3s ease;
+            }
+
+            .sidebar-menu a:hover,
+            .sidebar-menu a.active {
+                background-color: var(--primary-light);
+                color: var(--primary);
+            }
+
+            /* Main Content */
+            .main-content {
+                display: flex;
+                flex-direction: column;
+                gap: 25px;
+            }
+
+            .page-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 10px;
+            }
+
+            .page-title {
+                font-size: 1.8rem;
+                font-weight: 600;
+            }
+
+            .page-subtitle {
+                color: var(--text-secondary);
+                margin-bottom: 25px;
+            }
+
+            /* Filters */
+            .filters {
+                display: flex;
+                gap: 15px;
+                margin-bottom: 25px;
+                flex-wrap: wrap;
+            }
+
+            .filter-btn {
+                background-color: var(--card);
+                border: 1.5px solid #e2e8f0;
+                border-radius: 8px;
+                padding: 8px 16px;
+                font-size: 0.9rem;
+                font-weight: 500;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                color: var(--text-secondary);
+            }
+
+            .filter-btn.active,
+            .filter-btn:hover {
+                background-color: var(--primary);
+                color: white;
+                border-color: var(--primary);
+            }
+
+            /* Booking Cards */
+            .bookings-container {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .booking-card {
+                background-color: var(--card);
+                border-radius: 16px;
+                padding: 25px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+                border-left: 4px solid var(--primary);
+            }
+
+            .booking-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+                margin-bottom: 20px;
+            }
+
+            .booking-title {
+                font-size: 1.3rem;
+                font-weight: 600;
+                margin-bottom: 5px;
+            }
+
+            .booking-status {
+                display: inline-block;
+                padding: 6px 12px;
+                border-radius: 20px;
+                font-size: 0.8rem;
+                font-weight: 600;
+            }
+
+            .status-pending {
+                background-color: #fef3c7;
+                color: #d97706;
+            }
+
+            .status-confirmed {
+                background-color: var(--accent-light);
+                color: var(--success);
+            }
+
+            .status-completed {
+                background-color: var(--primary-light);
+                color: var(--primary);
+            }
+
+            .status-cancelled {
+                background-color: #fee2e2;
+                color: var(--error);
+            }
+
+            .booking-details {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+                margin-bottom: 20px;
+            }
+
+            .user-info {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+            }
+
+            .user-avatar-small {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                background: linear-gradient(
+                    135deg,
+                    var(--primary) 0%,
+                    var(--accent) 100%
+                );
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-weight: 600;
+                font-size: 0.9rem;
+            }
+
+            .user-details h4 {
+                font-size: 1.1rem;
+                margin-bottom: 5px;
+            }
+
+            .user-details p {
+                color: var(--text-secondary);
+                font-size: 0.9rem;
+            }
+
+            .skill-match {
+                background-color: var(--primary-light);
+                border-radius: 12px;
+                padding: 15px;
+            }
+
+            .skill-match-title {
+                font-size: 0.9rem;
+                font-weight: 600;
+                margin-bottom: 10px;
+                color: var(--primary);
+            }
+
+            .skill-tags {
+                display: flex;
+                gap: 8px;
+                flex-wrap: wrap;
+            }
+
+            .skill-tag {
+                background-color: var(--card);
+                color: var(--primary);
+                padding: 6px 12px;
+                border-radius: 20px;
+                font-size: 0.8rem;
+                font-weight: 500;
+            }
+
+            .booking-meta {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 15px;
+                margin-bottom: 20px;
+            }
+
+            .meta-item {
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .meta-label {
+                font-size: 0.8rem;
+                color: var(--text-secondary);
+            }
+
+            .meta-value {
+                font-size: 0.9rem;
+                font-weight: 500;
+            }
+
+            .booking-actions {
+                display: flex;
+                gap: 10px;
+                justify-content: flex-end;
+            }
+
+            .action-btn {
+                padding: 10px 20px;
+                border-radius: 8px;
+                font-size: 0.9rem;
+                font-weight: 500;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                border: none;
+            }
+
+            .btn-primary {
+                background: linear-gradient(
+                    135deg,
+                    var(--primary) 0%,
+                    var(--accent) 100%
+                );
+                color: white;
+            }
+
+            .btn-primary:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 18px rgba(99, 102, 241, 0.4);
+            }
+
+            .btn-secondary {
+                background-color: var(--primary-light);
+                color: var(--primary);
+            }
+
+            .btn-secondary:hover {
+                background-color: var(--primary);
+                color: white;
+            }
+
+            .btn-outline {
+                background-color: transparent;
+                border: 1.5px solid #e2e8f0;
+                color: var(--text-secondary);
+            }
+
+            .btn-outline:hover {
+                border-color: var(--primary);
+                color: var(--primary);
+            }
+
+            /* Empty State */
+            .empty-state {
+                text-align: center;
+                padding: 60px 20px;
+                background-color: var(--card);
+                border-radius: 16px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            }
+
+            .empty-state i {
+                font-size: 4rem;
+                margin-bottom: 20px;
+                color: var(--primary-light);
+            }
+
+            .empty-state h3 {
+                font-size: 1.5rem;
+                margin-bottom: 10px;
+            }
+
+            .empty-state p {
+                color: var(--text-secondary);
+                margin-bottom: 25px;
+            }
+
+            /* Responsive */
+            @media (max-width: 768px) {
+                .dashboard {
+                    grid-template-columns: 1fr;
+                }
+
+                .booking-details {
+                    grid-template-columns: 1fr;
+                }
+
+                .booking-meta {
+                    grid-template-columns: 1fr 1fr;
+                }
+
+                .nav-links {
+                    display: none;
+                }
+
+                .filters {
+                    justify-content: center;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <!-- Header -->
+            <div class="header">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <div class="logo-text">Skill Swap</div>
+                </div>
+                <div class="nav-links">
+                    <a href="#">Dashboard</a>
+                    <a href="#">Explore</a>
+                    <a href="#" class="active">Bookings</a>
+                    <a href="#">Messages</a>
+                </div>
+                <div class="user-menu">
+                    <div class="notification-icon">
+                        <i class="fas fa-bell"></i>
+                        <div class="notification-badge">3</div>
+                    </div>
+                    <div class="user-avatar">JD</div>
+                </div>
+            </div>
+
+            <!-- Dashboard -->
+            <div class="dashboard">
+                <!-- Sidebar -->
+                <div class="sidebar">
+                    <ul class="sidebar-menu">
+                        <li>
+                            <a href="#"><i class="fas fa-user"></i> Profile</a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                ><i class="fas fa-calendar-check"></i>
+                                Bookings</a
+                            >
+                        </li>
+                        <li>
+                            <a href="#"
+                                ><i class="fas fa-comments"></i> Messages</a
+                            >
+                        </li>
+                        <li>
+                            <a href="#"><i class="fas fa-star"></i> Reviews</a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                ><i class="fas fa-wallet"></i> Payments</a
+                            >
+                        </li>
+                        <li>
+                            <a href="#"><i class="fas fa-cog"></i> Settings</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Main Content -->
+                <div class="main-content">
+                    <div class="page-header">
+                        <h1 class="page-title">My Bookings</h1>
+                    </div>
+                    <p class="page-subtitle">
+                        Manage your skill exchange sessions and track your
+                        bookings
+                    </p>
+
+                    <!-- Filters -->
+                    <div class="filters">
+                        <button class="filter-btn active">All Bookings</button>
+                        <button class="filter-btn">Pending</button>
+                        <button class="filter-btn">Confirmed</button>
+                        <button class="filter-btn">Completed</button>
+                        <button class="filter-btn">Cancelled</button>
+                    </div>
+
+                    <!-- Bookings Container -->
+                    <div class="bookings-container" id="bookingsContainer">
+                        <!-- Booking cards will be dynamically added here -->
+                    </div>
+
+                    <!-- Empty State (initially hidden) -->
+                    <div
+                        class="empty-state"
+                        id="emptyState"
+                        style="display: none"
+                    >
+                        <i class="fas fa-calendar-times"></i>
+                        <h3>No Bookings Yet</h3>
+                        <p>
+                            You don't have any bookings at the moment. Start
+                            exploring skills to book a session!
+                        </p>
+                        <button class="action-btn btn-primary">
+                            Explore Skills
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const bookingsContainer =
+                    document.getElementById('bookingsContainer');
+                const emptyState = document.getElementById('emptyState');
+                const filterButtons = document.querySelectorAll('.filter-btn');
+
+                // Sample booking data
+                const bookings = [
+                    {
+                        id: 1,
+                        title: 'Web Development Session',
+                        status: 'confirmed',
+                        date: '2023-10-15',
+                        time: '14:00 - 15:30',
+                        duration: '1.5 hours',
+                        price: '$45',
+                        user: {
+                            name: 'Sarah Johnson',
+                            avatar: 'SJ',
+                            role: 'Learner',
+                            skills: ['HTML', 'CSS', 'JavaScript'],
+                        },
+                        skillMatch: ['React', 'Node.js', 'MongoDB'],
+                        type: 'Online',
+                        notes: 'Focus on React hooks and state management',
+                    },
+                    {
+                        id: 2,
+                        title: 'Guitar Lesson - Beginner',
+                        status: 'pending',
+                        date: '2023-10-18',
+                        time: '18:00 - 19:00',
+                        duration: '1 hour',
+                        price: '$30',
+                        user: {
+                            name: 'Mike Chen',
+                            avatar: 'MC',
+                            role: 'Learner',
+                            skills: ['Music Theory', 'Piano'],
+                        },
+                        skillMatch: ['Acoustic Guitar', 'Music Theory'],
+                        type: 'In-person',
+                        notes: 'First lesson - basic chords and strumming patterns',
+                    },
+                    {
+                        id: 3,
+                        title: 'Spanish Conversation Practice',
+                        status: 'completed',
+                        date: '2023-10-10',
+                        time: '16:00 - 17:00',
+                        duration: '1 hour',
+                        price: '$25',
+                        user: {
+                            name: 'Elena Rodriguez',
+                            avatar: 'ER',
+                            role: 'Teacher',
+                            skills: ['Spanish', 'English', 'Teaching'],
+                        },
+                        skillMatch: ['Conversational Spanish', 'Vocabulary'],
+                        type: 'Online',
+                        notes: 'Great session! Focused on travel vocabulary.',
+                    },
+                    {
+                        id: 4,
+                        title: 'Python Data Analysis',
+                        status: 'cancelled',
+                        date: '2023-10-12',
+                        time: '11:00 - 12:30',
+                        duration: '1.5 hours',
+                        price: '$50',
+                        user: {
+                            name: 'David Kim',
+                            avatar: 'DK',
+                            role: 'Learner',
+                            skills: ['Python Basics', 'Excel'],
+                        },
+                        skillMatch: ['Pandas', 'NumPy', 'Data Visualization'],
+                        type: 'Online',
+                        notes: 'Cancelled due to scheduling conflict',
+                    },
+                ];
+
+                // Render bookings
+                function renderBookings(filter = 'all') {
+                    bookingsContainer.innerHTML = '';
+
+                    const filteredBookings =
+                        filter === 'all'
+                            ? bookings
+                            : bookings.filter(
+                                  (booking) => booking.status === filter
+                              );
+
+                    if (filteredBookings.length === 0) {
+                        emptyState.style.display = 'block';
+                        return;
+                    }
+
+                    emptyState.style.display = 'none';
+
+                    filteredBookings.forEach((booking) => {
+                        const bookingCard = document.createElement('div');
+                        bookingCard.className = 'booking-card';
+
+                        // Status class
+                        const statusClass = `status-${booking.status}`;
+
+                        bookingCard.innerHTML = `
+                        <div class="booking-header">
+                            <div>
+                                <h3 class="booking-title">${booking.title}</h3>
+                                <span class="booking-status ${statusClass}">${
+                            booking.status.charAt(0).toUpperCase() +
+                            booking.status.slice(1)
+                        }</span>
+                            </div>
+                        </div>
+                        
+                        <div class="booking-details">
+                            <div class="user-info">
+                                <div class="user-avatar-small">${
+                                    booking.user.avatar
+                                }</div>
+                                <div class="user-details">
+                                    <h4>${booking.user.name}</h4>
+                                    <p>${
+                                        booking.user.role
+                                    } • ${booking.user.skills.join(', ')}</p>
+                                </div>
+                            </div>
+                            
+                            <div class="skill-match">
+                                <div class="skill-match-title">Skill Match</div>
+                                <div class="skill-tags">
+                                    ${booking.skillMatch
+                                        .map(
+                                            (skill) =>
+                                                `<span class="skill-tag">${skill}</span>`
+                                        )
+                                        .join('')}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="booking-meta">
+                            <div class="meta-item">
+                                <span class="meta-label">Date</span>
+                                <span class="meta-value">${booking.date}</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Time</span>
+                                <span class="meta-value">${booking.time}</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Duration</span>
+                                <span class="meta-value">${
+                                    booking.duration
+                                }</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Price</span>
+                                <span class="meta-value">${booking.price}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="booking-actions">
+                            ${
+                                booking.status === 'pending'
+                                    ? `
+                                <button class="action-btn btn-primary" onclick="confirmBooking(${booking.id})">Confirm</button>
+                                <button class="action-btn btn-outline" onclick="cancelBooking(${booking.id})">Decline</button>
+                            `
+                                    : ''
+                            }
+                            
+                            ${
+                                booking.status === 'confirmed'
+                                    ? `
+                                <button class="action-btn btn-primary" onclick="startSession(${booking.id})">Start Session</button>
+                                <button class="action-btn btn-outline" onclick="rescheduleBooking(${booking.id})">Reschedule</button>
+                            `
+                                    : ''
+                            }
+                            
+                            ${
+                                booking.status === 'completed'
+                                    ? `
+                                <button class="action-btn btn-secondary" onclick="leaveReview(${booking.id})">Leave Review</button>
+                                <button class="action-btn btn-outline" onclick="viewDetails(${booking.id})">View Details</button>
+                            `
+                                    : ''
+                            }
+                            
+                            ${
+                                booking.status === 'cancelled'
+                                    ? `
+                                <button class="action-btn btn-outline" onclick="rebookSession(${booking.id})">Rebook</button>
+                            `
+                                    : ''
+                            }
+                            
+                            <button class="action-btn btn-outline" onclick="messageUser(${
+                                booking.id
+                            })">
+                                <i class="fas fa-comment"></i> Message
+                            </button>
+                        </div>
+                    `;
+
+                        bookingsContainer.appendChild(bookingCard);
+                    });
+                }
+
+                // Filter functionality
+                filterButtons.forEach((button) => {
+                    button.addEventListener('click', function () {
+                        // Remove active class from all buttons
+                        filterButtons.forEach((btn) =>
+                            btn.classList.remove('active')
+                        );
+
+                        // Add active class to clicked button
+                        this.classList.add('active');
+
+                        // Get filter value
+                        const filter = this.textContent
+                            .toLowerCase()
+                            .replace(' bookings', '');
+
+                        // Render filtered bookings
+                        renderBookings(
+                            filter === 'all bookings' ? 'all' : filter
+                        );
+                    });
+                });
+
+                // Initial render
+                renderBookings();
+
+                // Action functions (would be connected to backend in real app)
+                window.confirmBooking = function (id) {
+                    alert(`Booking #${id} confirmed!`);
+                    // In real app, update booking status via API
+                };
+
+                window.cancelBooking = function (id) {
+                    if (
+                        confirm(
+                            'Are you sure you want to decline this booking?'
+                        )
+                    ) {
+                        alert(`Booking #${id} declined.`);
+                        // In real app, update booking status via API
+                    }
+                };
+
+                window.startSession = function (id) {
+                    alert(`Starting session for booking #${id}`);
+                    // In real app, redirect to session page
+                };
+
+                window.rescheduleBooking = function (id) {
+                    alert(`Reschedule booking #${id}`);
+                    // In real app, open reschedule modal
+                };
+
+                window.leaveReview = function (id) {
+                    alert(`Leave review for booking #${id}`);
+                    // In real app, redirect to review page
+                };
+
+                window.viewDetails = function (id) {
+                    alert(`View details for booking #${id}`);
+                    // In real app, show booking details modal
+                };
+
+                window.rebookSession = function (id) {
+                    alert(`Rebook session #${id}`);
+                    // In real app, open booking form with pre-filled details
+                };
+
+                window.messageUser = function (id) {
+                    alert(`Message user for booking #${id}`);
+                    // In real app, redirect to messages
+                };
+            });
+        </script>
+    </body>
+</html>
