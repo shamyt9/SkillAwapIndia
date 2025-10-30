@@ -37,7 +37,7 @@
                         required
                     />
                     <div class="error-message" id="fullNameError">
-                        Please enter your full name
+                        Please enter your full and valid name(Only characters).
                     </div>
                 </div>
 
@@ -70,6 +70,21 @@
                     />
                     <div class="error-message" id="emailError">
                         Please enter a valid email address
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="phone"
+                        ><i class="fas fa-phone"></i> Contact Number</label
+                    >
+                    <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        placeholder="Enter your phone number"
+                        required
+                    />
+                    <div class="error-message" id="contactError">
+                        Please enter a valid contact number.
                     </div>
                 </div>
 
@@ -150,29 +165,6 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="skills"
-                        ><i class="fas fa-lightbulb"></i> Your Skills</label
-                    >
-                    <div class="skill-input">
-                        <input
-                            type="text"
-                            id="skillInput"
-                            placeholder="Add a skill you can teach"
-                        />
-                        <button
-                            type="button"
-                            class="add-skill-btn"
-                            id="addSkillBtn"
-                        >
-                            <i class="fas fa-plus"></i>
-                        </button>
-                    </div>
-                    <div class="skill-tags" id="skillTags">
-                        <!-- Skills will be added here dynamically -->
-                    </div>
-                </div>
-
                 <div class="form-row">
                     <div class="form-group">
                         <label for="city"
@@ -190,16 +182,96 @@
                         <label for="country"
                             ><i class="fas fa-globe"></i> Country</label
                         >
-                        <select id="country" name="country">
+                        <select id="country" name="country" required>
                             <option value="">Select your country</option>
-                            <option value="US">United States</option>
-                            <option value="CA">Canada</option>
-                            <option value="UK">United Kingdom</option>
-                            <option value="AU">Australia</option>
-                            <option value="DE">Germany</option>
-                            <option value="FR">France</option>
-                            <option value="JP">Japan</option>
-                            <option value="other">Other</option>
+                            <option value="India">India</option>
+                            <option value="United States">United States</option>
+                            <option value="United Kingdom">
+                                United Kingdom
+                            </option>
+                            <option value="Canada">Canada</option>
+                            <option value="Australia">Australia</option>
+                            <option value="United Arab Emirates">
+                                United Arab Emirates
+                            </option>
+                            <option value="Saudi Arabia">Saudi Arabia</option>
+                            <option value="Singapore">Singapore</option>
+                            <option value="Germany">Germany</option>
+                            <option value="France">France</option>
+                            <option value="Italy">Italy</option>
+                            <option value="Spain">Spain</option>
+                            <option value="Brazil">Brazil</option>
+                            <option value="Mexico">Mexico</option>
+                            <option value="Russia">Russia</option>
+                            <option value="Japan">Japan</option>
+                            <option value="China">China</option>
+                            <option value="South Korea">South Korea</option>
+                            <option value="South Africa">South Africa</option>
+                            <option value="Nigeria">Nigeria</option>
+                            <option value="Pakistan">Pakistan</option>
+                            <option value="Bangladesh">Bangladesh</option>
+                            <option value="Sri Lanka">Sri Lanka</option>
+                            <option value="Nepal">Nepal</option>
+                            <option value="Thailand">Thailand</option>
+                            <option value="Vietnam">Vietnam</option>
+                            <option value="Philippines">Philippines</option>
+                            <option value="Malaysia">Malaysia</option>
+                            <option value="Indonesia">Indonesia</option>
+                            <option value="Hong Kong">Hong Kong</option>
+                            <option value="Taiwan">Taiwan</option>
+                            <option value="Turkey">Turkey</option>
+                            <option value="Iran">Iran</option>
+                            <option value="Iraq">Iraq</option>
+                            <option value="Israel">Israel</option>
+                            <option value="Egypt">Egypt</option>
+                            <option value="Kenya">Kenya</option>
+                            <option value="Ethiopia">Ethiopia</option>
+                            <option value="Tanzania">Tanzania</option>
+                            <option value="Ghana">Ghana</option>
+                            <option value="Uganda">Uganda</option>
+                            <option value="Argentina">Argentina</option>
+                            <option value="Chile">Chile</option>
+                            <option value="Colombia">Colombia</option>
+                            <option value="Peru">Peru</option>
+                            <option value="Venezuela">Venezuela</option>
+                            <option value="Poland">Poland</option>
+                            <option value="Netherlands">Netherlands</option>
+                            <option value="Sweden">Sweden</option>
+                            <option value="Norway">Norway</option>
+                            <option value="Denmark">Denmark</option>
+                            <option value="Finland">Finland</option>
+                            <option value="Switzerland">Switzerland</option>
+                            <option value="Belgium">Belgium</option>
+                            <option value="Austria">Austria</option>
+                            <option value="Czech Republic">
+                                Czech Republic
+                            </option>
+                            <option value="Portugal">Portugal</option>
+                            <option value="Ireland">Ireland</option>
+                            <option value="Greece">Greece</option>
+                            <option value="Hungary">Hungary</option>
+                            <option value="Romania">Romania</option>
+                            <option value="Bulgaria">Bulgaria</option>
+                            <option value="Ukraine">Ukraine</option>
+                            <option value="Kazakhstan">Kazakhstan</option>
+                            <option value="New Zealand">New Zealand</option>
+                            <option value="Qatar">Qatar</option>
+                            <option value="Kuwait">Kuwait</option>
+                            <option value="Oman">Oman</option>
+                            <option value="Bahrain">Bahrain</option>
+                            <option value="Jordan">Jordan</option>
+                            <option value="Lebanon">Lebanon</option>
+                            <option value="Myanmar">Myanmar</option>
+                            <option value="Cambodia">Cambodia</option>
+                            <option value="Laos">Laos</option>
+                            <option value="Afghanistan">Afghanistan</option>
+                            <option value="Sudan">Sudan</option>
+                            <option value="Algeria">Algeria</option>
+                            <option value="Morocco">Morocco</option>
+                            <option value="Tunisia">Tunisia</option>
+                            <option value="Cameroon">Cameroon</option>
+                            <option value="Senegal">Senegal</option>
+                            <option value="Other">Other</option>
                         </select>
                     </div>
                 </div>
@@ -242,82 +314,89 @@
             referrerpolicy="no-referrer"
         ></script>
         <script>
-            document
-                .getElementById('registrationForm')
-                .addEventListener('submit', function (e) {
-                    e.preventDefault();
+            const form = document.getElementById('registrationForm');
 
-                    // Reset error messages
-                    const errorMessages =
-                        document.querySelectorAll('.error-message');
-                    errorMessages.forEach(
-                        (msg) => (msg.style.display = 'none')
-                    );
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
 
-                    let isValid = true;
+                // Reset error messages
+                const errorMessages =
+                    document.querySelectorAll('.error-message');
+                errorMessages.forEach((msg) => (msg.style.display = 'none'));
 
-                    // Validate full name
-                    const fullName = document.getElementById('fullName').value;
-                    if (!fullName.trim()) {
-                        document.getElementById('fullNameError').style.display =
-                            'block';
-                        isValid = false;
-                    }
+                let isValid = true;
 
-                    // Validate username
-                    const username = document.getElementById('username').value;
-                    if (!username.trim()) {
-                        document.getElementById('usernameError').style.display =
-                            'block';
-                        isValid = false;
-                    }
+                // Validate full name
+                const fullName = document.getElementById('fullName').value;
+                const nameRegex = /^[a-zA-Z\s]+$/;
+                if (!fullName.trim() || !nameRegex.test(fullName)) {
+                    document.getElementById('fullNameError').style.display =
+                        'block';
+                    isValid = false;
+                }
 
-                    // Validate email
-                    const email = document.getElementById('email').value;
-                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                    if (!emailRegex.test(email)) {
-                        document.getElementById('emailError').style.display =
-                            'block';
-                        isValid = false;
-                    }
+                const phoneNum = document.getElementById('phone').value;
 
-                    // Validate password
-                    const password = document.getElementById('password').value;
-                    if (password.length < 8) {
-                        document.getElementById('passwordError').style.display =
-                            'block';
-                        isValid = false;
-                    }
+                if (!phoneNum.trim()) {
+                    document.getElementById('contactError').style.display =
+                        'block';
+                    isValid = false;
+                }
 
-                    // Validate confirm password
-                    const confirmPassword =
-                        document.getElementById('confirmPassword').value;
-                    if (password !== confirmPassword) {
-                        document.getElementById(
-                            'confirmPasswordError'
-                        ).style.display = 'block';
-                        isValid = false;
-                    }
+                // Validate username
+                const username = document.getElementById('username').value;
+                if (!username.trim()) {
+                    document.getElementById('usernameError').style.display =
+                        'block';
+                    isValid = false;
+                }
 
-                    // Validate terms
-                    const terms = document.getElementById('terms').checked;
-                    if (!terms) {
-                        document.getElementById('termsError').style.display =
-                            'block';
-                        isValid = false;
-                    }
+                // Validate email
+                const email = document.getElementById('email').value;
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) {
+                    document.getElementById('emailError').style.display =
+                        'block';
+                    isValid = false;
+                }
 
-                    if (isValid) {
-                        // In a real application, you would submit the form to a server here
-                        alert(
-                            'Account created successfully! Welcome to Skill Swap!'
-                        );
-                        // Reset form
-                        this.reset();
-                        resetPasswordStrength();
-                        document.getElementById('skillTags').innerHTML = '';
-                    }
-                });
+                // Validate password
+                const password = document.getElementById('password').value;
+                if (password.length < 8) {
+                    document.getElementById('passwordError').style.display =
+                        'block';
+                    isValid = false;
+                }
+
+                // Validate confirm password
+                const confirmPassword =
+                    document.getElementById('confirmPassword').value;
+                if (password !== confirmPassword) {
+                    document.getElementById(
+                        'confirmPasswordError'
+                    ).style.display = 'block';
+                    isValid = false;
+                }
+
+                // Validate terms
+                const terms = document.getElementById('terms').checked;
+                if (!terms) {
+                    document.getElementById('termsError').style.display =
+                        'block';
+                    isValid = false;
+                }
+
+                if (isValid) {
+                    const formData = new FormData(this);
+                    const formValues = Object.fromEntries(formData.entries());
+                    console.log('Form Submitted', formValues);
+
+                    // Reset form
+                    this.reset();
+                    resetPasswordStrength();
+                    document.getElementById('skillTags').innerHTML = '';
+                }
+            });
 
             // Password strength indicator
             document
@@ -395,39 +474,6 @@
                 upperReq.className = 'invalid';
                 lowerReq.className = 'invalid';
                 numberReq.className = 'invalid';
-            }
-
-            // Skills functionality
-            document
-                .getElementById('addSkillBtn')
-                .addEventListener('click', function () {
-                    const skillInput = document.getElementById('skillInput');
-                    const skill = skillInput.value.trim();
-
-                    if (skill) {
-                        addSkillTag(skill);
-                        skillInput.value = '';
-                    }
-                });
-
-            document
-                .getElementById('skillInput')
-                .addEventListener('keypress', function (e) {
-                    if (e.key === 'Enter') {
-                        e.preventDefault();
-                        document.getElementById('addSkillBtn').click();
-                    }
-                });
-
-            function addSkillTag(skill) {
-                const skillTags = document.getElementById('skillTags');
-                const tag = document.createElement('div');
-                tag.className = 'skill-tag';
-                tag.innerHTML = `
-                ${skill}
-                <i class="fas fa-times" onclick="this.parentElement.remove()"></i>
-            `;
-                skillTags.appendChild(tag);
             }
         </script>
     </body>
