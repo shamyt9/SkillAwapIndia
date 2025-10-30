@@ -307,6 +307,7 @@
                 </button>
             </form>
         </div>
+        <div id="message-indicator"></div>
         <script
             src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
             integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
@@ -388,13 +389,10 @@
 
                 if (isValid) {
                     const formData = new FormData(this);
-                    const formValues = Object.fromEntries(formData.entries());
-                    console.log('Form Submitted', formValues);
+                    // const formValues = Object.fromEntries(formData.entries());
+                    // console.log('Form Submitted', formValues);
 
-                    // Reset form
-                    this.reset();
-                    resetPasswordStrength();
-                    document.getElementById('skillTags').innerHTML = '';
+                    register(formData);
                 }
             });
 
@@ -474,6 +472,51 @@
                 upperReq.className = 'invalid';
                 lowerReq.className = 'invalid';
                 numberReq.className = 'invalid';
+            }
+
+            // BACKEND IMPLEMENTATION AJAX
+
+            function register(formData) {
+                $.ajax({
+                    url: '../api/saveRegistration.php',
+                    method: 'POST',
+                    data: formData,
+                    multipart: true,
+                    processData: false,
+                    contentType: false,
+                    dataType: 'json',
+                    success: function (response) {
+                        console.log(response);
+                        if (response.status === 'success') {
+                            type = 'success';
+                            form.reset();
+                            resetPasswordStrength();
+                        } else {
+                            type = 'error';
+                        }
+                        showMessage(type, response.message);
+                    },
+                    error: function (error) {
+                        //message = xhr.statusText || error;
+                        showMessage(
+                            'error',
+                            'Server error occurred. Please try again.'
+                        );
+                    },
+                });
+            }
+
+            function showMessage(type, message) {
+                const indicator = $('#message-indicator');
+                indicator
+                    .removeClass('success error')
+                    .addClass(type)
+                    .text(message)
+                    .fadeIn();
+
+                setTimeout(() => {
+                    indicator.fadeOut();
+                }, 3000);
             }
         </script>
     </body>
