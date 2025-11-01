@@ -15,3 +15,19 @@ bio TEXT DEFAULT NULL,
 terms_accepted TINYINT(1) DEFAULT 0,
 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+
+## SKILLS TABLE
+CREATE TABLE user_skills (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(100) NOT NULL,
+    role ENUM('teacher', 'learner') NOT NULL,
+    skill_name VARCHAR(150) NOT NULL,
+    skill_level ENUM('beginner', 'intermediate', 'expert') NOT NULL,
+    preferred_mode ENUM('online', 'in-person', 'both') NOT NULL,
+    availability VARCHAR(150),
+    description TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (username) REFERENCES users(username) ON DELETE CASCADE
+);
+

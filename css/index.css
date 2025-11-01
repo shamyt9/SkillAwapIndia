@@ -132,6 +132,96 @@ body {
     cursor: pointer;
 }
 
+/* 🔹 USER PROFILE SECTION */
+.user-profile {
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* 🔹 Profile image styling — fixed circular size */
+.profile-icon {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    min-height: 38px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--primary);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+    flex-shrink: 0; /* prevents shrinking in flex layouts */
+}
+
+.profile-icon:hover {
+    transform: scale(1.05);
+    border-color: var(--primary-hover);
+}
+
+/* 🔹 Dropdown box styling (hidden by default) */
+.user-profile .dropdown {
+    position: absolute;
+    top: 52px;
+    right: 0;
+    background: var(--card);
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    display: none;
+    z-index: 999;
+    min-width: 160px;
+    opacity: 0;
+    transform: translateY(-5px);
+    transition: all 0.25s ease;
+}
+
+/* 🔹 Dropdown visible when active (click toggle) */
+.user-profile .dropdown.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 🔹 Dropdown list styling */
+.user-profile .dropdown ul {
+    list-style: none;
+    margin: 0;
+    padding: 8px 0;
+}
+
+.user-profile .dropdown ul li a {
+    display: block;
+    padding: 10px 18px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: background 0.3s, color 0.3s;
+}
+
+.user-profile .dropdown ul li a:hover {
+    background: rgba(0, 0, 0, 0.05);
+    color: var(--primary);
+}
+
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+
+    .mobile-menu {
+        display: block;
+    }
+
+    .auth-buttons {
+        display: none;
+    }
+
+    .user-profile .dropdown {
+        right: 10px;
+        top: 45px;
+    }
+}
+
 /* Hero Section */
 .hero {
     background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
@@ -273,6 +363,7 @@ body {
 /* Popular Skills Slider */
 .skills-section {
     background-color: var(--card);
+    padding: 50px 0;
 }
 
 .slider-container {
@@ -291,8 +382,10 @@ body {
     min-width: 280px;
     background-color: var(--background);
     border-radius: 16px;
-    padding: 25px;
+    padding: 20px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
     transition: all 0.3s ease;
 }
 
@@ -305,11 +398,11 @@ body {
     display: inline-block;
     background-color: var(--primary-light);
     color: var(--primary);
-    padding: 6px 12px;
+    padding: 5px 12px;
     border-radius: 20px;
     font-size: 0.8rem;
     font-weight: 600;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 .skill-title {
@@ -318,12 +411,8 @@ body {
     margin-bottom: 10px;
 }
 
-.skill-stats {
-    display: flex;
-    justify-content: space-between;
+.skill-info {
     margin-bottom: 15px;
-    font-size: 0.9rem;
-    color: var(--text-secondary);
 }
 
 .skill-teacher {
@@ -344,23 +433,55 @@ body {
     color: white;
     font-weight: 600;
     font-size: 0.9rem;
+    flex-shrink: 0;
 }
 
 .teacher-info h4 {
     font-size: 0.9rem;
-    margin-bottom: 2px;
+    margin: 0 0 2px 0;
 }
 
 .teacher-info p {
     font-size: 0.8rem;
     color: var(--text-secondary);
+    margin: 0;
 }
 
-.skill-price {
-    font-size: 1.2rem;
-    font-weight: 700;
+.skill-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.skill-actions button {
+    flex: 1;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.skill-actions .btn-request {
+    background-color: var(--primary);
+    color: white;
+}
+
+.skill-actions .btn-request:hover {
+    opacity: 0.85;
+}
+
+.skill-actions .btn-view {
+    background-color: transparent;
+    border: 1px solid var(--primary);
     color: var(--primary);
-    margin-bottom: 15px;
+}
+
+.skill-actions .btn-view:hover {
+    background-color: var(--primary);
+    color: white;
 }
 
 .slider-controls {
@@ -387,6 +508,20 @@ body {
 .slider-btn:hover {
     background-color: var(--primary);
     color: white;
+}
+
+/* Default avatar fallback */
+.default-avatar {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    font-size: 0.9rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
 }
 
 /* How It Works */

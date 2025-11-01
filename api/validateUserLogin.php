@@ -3,7 +3,7 @@ header('Content-Type:application/json');
 include '../include/connection.php';
 session_start();
 
-if ($SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   $email = $_POST['email'];
   $password = $_POST['password'];
@@ -21,6 +21,7 @@ if ($SERVER['REQUEST_METHOD'] == 'POST') {
         $response['status'] = "success";
         $response['message'] = "Login successful";
 
+        $_SESSION['userid'] = $user['user_id'];
         $_SESSION['full_name'] = $user['full_name'];
         $_SESSION['username'] = $user['username'];
         $_SESSION['email'] = $user['email'];
