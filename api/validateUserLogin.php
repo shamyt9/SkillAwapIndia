@@ -1,64 +1,49 @@
 <?php
-header('Content-Type: application/json');
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
+header('Content-Type:application/json');
+include '../include/connection.php';
+session_start();
 
-require 'vendor/autoload.php';
+if ($SERVER['REQUEST_METHOD'] == 'POST') {
 
-$response = [];
-
-try {
-  // Simulate form data
-  $fullName = $_POST['fullName'] ?? 'Test User';
-  $email = $_POST['email'] ?? 'akmission369@gmail.com';
-
-  // Generate a test verification token
-  $token = bin2hex(random_bytes(16)); // 32-character random string
-
-  // Send verification email
-  sendVerificationEmail($email, $token, $fullName);
-
-  $response = [
-    "status" => "success",
-    "message" => "Test email sent successfully to $email. Check your inbox!"
-  ];
-
-} catch (Exception $e) {
-  $response = [
-    "status" => "error",
-    "message" => $e->getMessage()
-  ];
-}
-
-echo json_encode($response);
-
-
-// Function to send email
-function sendVerificationEmail($userEmail, $token, $fullName)
-{
-  $mail = new PHPMailer(true);
+  $email = $_POST['email'];
+  $password = $_POST['password'];
+  $response = [];
+  $sql = "SELECT * FROM users WHERE email=? or username=?";
 
   try {
-    // SMTP settings
-    $mail->isSMTP();
-    $mail->Host = 'smtp.gmail.com';
-    $mail->SMTPAuth = true;
-    $mail->Username = 'gagansingh56sa@gmail.com'; // your Gmail
-    $mail->Password = '12401240sa';   // app password if 2FA enabled
-    $mail->SMTPSecure = 'ssl';  // or 'ssl' with port 465
-    $mail->Port = 465;
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ss", $email, $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($result->num_rows > 0) {
+      $user = $result->fetch_assoc();
+      if (password_verify($password, $user['password'])) {
+        $response['status'] = "success";
+        $response['message'] = "Login successful";
 
-    $mail->setFrom('gagansingh56sa@gmail.com', 'SkillSwap');
-    $mail->addAddress($userEmail, $fullName);
+        $_SESSION['full_name'] = $user['full_name'];
+        $_SESSION['username'] = $user['username'];
+        $_SESSION['email'] = $user['email'];
+        $_SESSION['phone'] = $user['phone'];
+        $_SESSION['profile_photo'] = $user['profile_photo'];
+        $_SESSION['city'] = $user['city'];
+        $_SESSION['country'] = $user['country'];
+        $_SESSION['bio'] = $user['bio'];
+        $_SESSION['created_at'] = $user['created_at'];
 
-    $mail->isHTML(true);
-    $mail->Subject = 'Test Verify Your SkillSwap Account';
-    $mail->Body = "Hi $fullName,<br><br>Click the link below to verify your email:<br>
-                       <a href='http://localhost/skillswap/verify.php?token=$token'>Verify Email</a>";
+      } else {
+        $response['status'] = "error";
+        $response['message'] = "Invalid password";
+      }
 
-    $mail->send();
+    }
   } catch (Exception $e) {
-    throw new Exception("Mailer Error: " . $mail->ErrorInfo);
+    $response['status'] = "error";
+    $response['message'] = "Server error: " . $e->getMessage();
   }
+
+  echo json_encode($response);
 }
+
+
 ?>

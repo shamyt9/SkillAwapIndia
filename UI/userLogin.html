@@ -252,17 +252,16 @@
                     <a href="#" class="forgot-password">Forgot password?</a>
 
                     <button type="submit" class="login-btn">Sign In</button>
-
-                    <div class="divider">
-                        <span>Or</span>
-                    </div>
-
-                    <button type="button" class="google-btn">
-                        <i class="fab fa-google"></i> Continue with Google
-                    </button>
                 </form>
             </div>
         </div>
+        <div id="message-indicator"></div>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+            integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        ></script>
 
         <script>
             document
@@ -296,20 +295,46 @@
                     }
 
                     if (isValid) {
-                        // In a real application, you would submit the form to a server here
-                        alert('Login successful! Welcome back to Skill Swap.');
+                        checkLoginStatus();
                         // Reset form
                         this.reset();
                     }
                 });
 
-            // Google login button
-            document
-                .querySelector('.google-btn')
-                .addEventListener('click', function () {
-                    alert('Redirecting to Google authentication...');
-                    // In a real application, you would redirect to Google OAuth here
+            function checkLoginStatus() {
+                const form = document.getElementById('loginForm');
+                const formData = new FormData(form);
+                $.ajax({
+                    url: '../api/validateUserLogin.php',
+                    method: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        showMessage(response.status, response.message);
+                        window.location.href = './userProfile.html';
+                    },
+                    error: function (error) {
+                        showMessage(
+                            'error',
+                            'SERVER ERROR: Unable to process login at this time.'
+                        );
+                    },
                 });
+            }
+
+            function showMessage(type, message) {
+                const indicator = $('#message-indicator');
+                indicator
+                    .removeClass('success error')
+                    .addClass(type)
+                    .text(message)
+                    .fadeIn();
+
+                setTimeout(() => {
+                    indicator.fadeOut();
+                }, 3000);
+            }
         </script>
     </body>
 </html>
